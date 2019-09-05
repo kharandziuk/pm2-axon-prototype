@@ -9,7 +9,7 @@ const delay = (ms) => new Promise((resolve) => {
 
 const main = async () => {
   while(await delay(500).then(() => true)) {
-    console.log('master')
+    logger.debug('master')
   }
 }
 main()

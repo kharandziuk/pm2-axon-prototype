@@ -9,10 +9,18 @@ pm2.connect(true, function(err) {
   }
   pm2.start([
     {
-      script             : "master.js",
+      script: "master.js",
+      output: 'dev/null',
+      error: 'dev/null',
+      maxRestarts: 2,
+      restartDelay: 1000,
     },
     {
-      script             : "worker.js",
+      script: "worker.js",
+      output: 'dev/null',
+      error: 'dev/null',
+      maxRestarts: 2,
+      restartDelay: 1000,
     },
   ],
     function(err, procs) {
@@ -27,6 +35,9 @@ pm2.launchBus((err, bus) => {
   });
   bus.on('log:err', data => {
     process.stderr.write(data.data);
+  });
+  bus.on('log:PM2', data => {
+    logger.debug(data.data);
   });
  })
 })

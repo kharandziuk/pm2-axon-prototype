@@ -3,6 +3,10 @@
     "axon": "^2.0.3",
     "express": "^4.17.1",
     "pino": "^5.13.2",
+    "pino-colada": "^1.4.5",
     "pm2": "^3.5.1"
+  },
+  "scripts": {
+    "start": "node index.js | pino-colada"
   }
 }
