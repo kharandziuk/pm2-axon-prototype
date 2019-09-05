@@ -1,8 +1,10 @@
 const pm2 = require('pm2')
+const pino = require('pino')
+const logger = pino()
 
 pm2.connect(true, function(err) {
   if (err) {
-    console.error(err);
+    logger.fatal(err)
     process.exit(2);
   }
   pm2.start([
@@ -33,7 +35,6 @@ pm2.launchBus((err, bus) => {
 process.stdin.resume();//so the program will not close instantly
 
 function exitHandler(options, exitCode) {
-    if (options.cleanup) console.log('clean');
     pm2.killDaemon(function(err) {
         if(err) {
           throw err
