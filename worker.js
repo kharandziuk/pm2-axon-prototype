@@ -1,10 +1,13 @@
-const delay = (ms) => new Promise((resolve) => {
-    setTimeout(resolve, ms)
+const express = require('express')
+const app = express()
+const port = 3000
+
+
+console.log(process.pid)
+
+app.use(express.json())
+app.post('/', (req, res) => {
+  () => res.status(201).json({status: 'created'})
 })
 
-const main = async () => {
-  while(await delay(500).then(() => true)) {
-    console.log('worker')
-  }
-}
-main()
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
